@@ -1,43 +1,48 @@
 package io.github.tabbycat444.japcrd.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import io.github.tabbycat444.japcrd.ui.theme.OutlinedText
 
 /**
- * A composable function that displays a title text inside a styled container.
+ * A composable function that displays a title text within a styled surface. The surface includes
+ * rounded corners, shadow elevation, and tonal elevation to create a polished appearance.
  *
- * @param text The text to display as the title.
- * @param modifier The modifier to be applied to the container displaying the title text.
+ * @param text The text to be displayed as the title.
+ * @param modifier A Modifier to apply additional styling or layout parameters to the surface.
  */
 @Composable
 fun TitleText(
     text: String,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(35.dp))
-            .padding(vertical = 10.dp, horizontal = 5.dp)
-            .background(MaterialTheme.colorScheme.surfaceContainerLow)
-            .width(400.dp)
+    val shape = RoundedCornerShape(10.dp)
+
+    Surface(
+        modifier = Modifier
+            .width(300.dp)
+            .then(modifier),
+        shape = shape,
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        tonalElevation = 2.dp,
+        shadowElevation = 30.dp
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-        )
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.padding(bottom = 5.dp)
+        ) {
+            val textFamily = MaterialTheme.typography.headlineLarge
+
+            OutlinedText(text = text, textFamily = textFamily)
+
+        }
     }
 }
