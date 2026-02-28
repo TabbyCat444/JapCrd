@@ -2,24 +2,24 @@ package io.github.tabbycat444.japcrd.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import io.github.tabbycat444.japcrd.data.CardData
 import io.github.tabbycat444.japcrd.data.CardRepository
 
 /**
- * ViewModel for managing flashcard data and state in the Japanese learning application.
+ * ViewModel class for managing the state and behavior of a Japanese flashcard deck.
  *
- * This ViewModel provides UI state and behavior for navigating and interacting with
- * Japanese card decks. It handles deck selection, card navigation, card flipping, and
- * shuffling functionality. The data is sourced from a `CardRepository` which provides
- * relevant card information based on the selected deck.
+ * The JapCrdViewModel is responsible for managing the currently selected deck of flashcards,
+ * tracking the current card and its flip state, and providing navigation and deck-related
+ * operations such as shuffling and switching decks. It communicates with a repository to
+ * load deck data.
  *
- * Responsibilities:
- * - Maintain the current deck name and associated card data.
- * - Provide state variables representing the current position within the deck and the flip state of cards.
- * - Enable actions such as shuffling, switching decks, navigating cards, and toggling flip states.
+ * Primary responsibilities:
+ * - Load and manage card data for the selected deck.
+ * - Track the current card index and flip state for display purposes.
+ * - Handle operations like flipping cards, navigating between cards, and shuffling the deck.
  */
 class JapCrdViewModel : ViewModel() {
     private val repository = CardRepository()
