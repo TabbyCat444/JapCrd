@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import io.github.tabbycat444.japcrd.ui.components.CardItem
+import io.github.tabbycat444.japcrd.ui.components.OutlinedText
 import io.github.tabbycat444.japcrd.ui.components.TitleText
-import io.github.tabbycat444.japcrd.ui.theme.OutlinedText
 import io.github.tabbycat444.japcrd.viewmodel.JapCrdViewModel
 
 /**
@@ -55,9 +55,9 @@ fun FlashcardScreen(viewModel: JapCrdViewModel) {
                 textToShow = if (viewModel.isFlipped) card.characterInfo else card.character,
                 onFlip = { viewModel.toggleFlip() },
                 textStyle = if (viewModel.isFlipped) {
-                    MaterialTheme.typography.bodyLarge
+                    MaterialTheme.typography.bodyMedium
                 } else {
-                    MaterialTheme.typography.displayLarge
+                    MaterialTheme.typography.displayMedium
                 }
             )
         }
@@ -73,17 +73,26 @@ fun FlashcardScreen(viewModel: JapCrdViewModel) {
         ) {
             val textFamily = MaterialTheme.typography.labelLarge
 
-            Button(onClick = { viewModel.prevCard() }) {
+            Button(
+                onClick = { viewModel.prevCard() },
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
+            ) {
                 Box(contentAlignment = Alignment.Center) {
                     OutlinedText(text = "Prev", textFamily = textFamily)
                 }
             }
-            Button(onClick = { viewModel.shuffleDeck() }) {
+            Button(
+                onClick = { viewModel.shuffleDeck() },
+                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+            ) {
                 Box(contentAlignment = Alignment.Center) {
                     OutlinedText(text = "Shuffle", textFamily = textFamily)
                 }
             }
-            Button(onClick = { viewModel.nextCard() }) {
+            Button(
+                onClick = { viewModel.nextCard() },
+                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp)
+            ) {
                 Box(contentAlignment = Alignment.Center) {
                     OutlinedText(text = "Next", textFamily = textFamily)
                 }

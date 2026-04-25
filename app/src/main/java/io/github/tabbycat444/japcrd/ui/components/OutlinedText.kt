@@ -1,4 +1,4 @@
-package io.github.tabbycat444.japcrd.ui.theme
+package io.github.tabbycat444.japcrd.ui.components
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,7 +23,7 @@ fun OutlinedText(
     textFamily: TextStyle,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Center,
-    outlineWidth: Float = 2.0f,
+    outlineWidth: Float = 1.5f,
 ) {
     // ~~~ TEXT OUTLINE ~~~
     Text(

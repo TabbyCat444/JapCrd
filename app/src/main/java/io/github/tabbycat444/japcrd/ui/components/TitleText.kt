@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import io.github.tabbycat444.japcrd.ui.theme.OutlinedText
 
 /**
  * A composable function that displays a title text within a styled surface. The surface includes
@@ -31,7 +30,7 @@ fun TitleText(
             .width(300.dp)
             .then(modifier),
         shape = shape,
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        color = MaterialTheme.colorScheme.primary,
         tonalElevation = 2.dp,
         shadowElevation = 30.dp
     ) {

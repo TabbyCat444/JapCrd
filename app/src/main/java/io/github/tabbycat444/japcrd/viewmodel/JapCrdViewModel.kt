@@ -24,7 +24,7 @@ import io.github.tabbycat444.japcrd.data.CardRepository
 class JapCrdViewModel : ViewModel() {
     private val repository = CardRepository()
 
-    var currDeck by mutableStateOf("Basic Hiragana")
+    var currDeck by mutableStateOf("All Hiragana")
         private set
 
     var cardDataList by mutableStateOf(repository.getDeckCards(currDeck))
@@ -50,7 +50,7 @@ class JapCrdViewModel : ViewModel() {
     var isFlipped by mutableStateOf(false)
         private set
 
-    val screenTitle = "Basic Hiragana"
+    val screenTitle = "All Hiragana"
 
     val currCard: CardData
         get() = cardDataList[currIndex]
