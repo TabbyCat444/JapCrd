@@ -1,72 +1,89 @@
 package io.github.tabbycat444.japcrd.viewmodel
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import io.github.tabbycat444.japcrd.data.CardData
 import io.github.tabbycat444.japcrd.data.CardRepository
+import io.github.tabbycat444.japcrd.ui.screens.FlashcardUiState
 
 /**
- * ViewModel class for managing the state and behavior of a Japanese flashcard deck.
+ * JapCrdViewModel is responsible for managing the state and behavior of a flashcard
+ * application that includes decks of cards for the purpose of learning Japanese.
+ * It interacts with a repository to retrieve card data and provides operations
+ * such as deck selection, card flipping, shuffling, and navigation between cards.
  *
- * The JapCrdViewModel is responsible for managing the currently selected deck of flashcards,
- * tracking the current card and its flip state, and providing navigation and deck-related
- * operations such as shuffling and switching decks. It communicates with a repository to
- * load deck data.
+ * @constructor Initializes the view model with a default or provided CardRepository instance.
  *
- * Primary responsibilities:
- * - Load and manage card data for the selected deck.
- * - Track the current card index and flip state for display purposes.
- * - Handle operations like flipping cards, navigating between cards, and shuffling the deck.
+ * @property repository The data source used for accessing deck and card information.
+ *
+ * @property uiState The observable state of the view model, which includes the current deck,
+ *                   the list of cards in the deck, the current card index, and whether the card
+ *                   is flipped or not.
  */
-class JapCrdViewModel : ViewModel() {
-    private val repository = CardRepository()
+class JapCrdViewModel(
+    private val repository: CardRepository = CardRepository()
+) : ViewModel() {
 
-    var currDeck by mutableStateOf("Basic Hiragana")
+    var uiState by mutableStateOf(createInitialState())
         private set
 
-    var cardDataList by mutableStateOf(repository.getDeckCards(currDeck))
-        private set
+    private fun createInitialState(): FlashcardUiState {
+        val deckNames = repository.getDeckNames()
+        val initialDeck = deckNames.firstOrNull().orEmpty()
+
+        return FlashcardUiState(
+            deckNames = deckNames,
+            currDeck = initialDeck,
+            cardDataList = repository.getDeckCards(initialDeck),
+            currIndex = 0,
+            isFlipped = false
+        )
+    }
 
     fun shuffleDeck() {
-        cardDataList = cardDataList.shuffled()
-        currIndex = 0
-        isFlipped = false
+        if (uiState.cardDataList.isEmpty()) return
+
+        uiState = uiState.copy(
+            cardDataList = uiState.cardDataList.shuffled(),
+            currIndex = 0,
+            isFlipped = false
+        )
     }
 
     fun setDeck(deckName: String) {
-        currDeck = deckName
-        cardDataList = repository.getDeckCards(deckName)
-        currIndex = 0
-        isFlipped = false
+        val cardList = repository.getDeckCards(deckName)
+        if (cardList.isEmpty()) return
+
+        uiState = uiState.copy(
+            currDeck = deckName,
+            cardDataList = cardList,
+            currIndex = 0,
+            isFlipped = false
+        )
     }
 
-    // ~~~ UI STATE ~~~
-    var currIndex by mutableIntStateOf(0)
-        private set
-
-    var isFlipped by mutableStateOf(false)
-        private set
-
-    val screenTitle = "Basic Hiragana"
-
-    val currCard: CardData
-        get() = cardDataList[currIndex]
-
-    // ~~~ LOGIC ~~~
     fun toggleFlip() {
-        isFlipped = !isFlipped
+        uiState = uiState.copy(
+            isFlipped = !uiState.isFlipped
+        )
     }
 
     fun nextCard() {
-        isFlipped = false
-        currIndex = (currIndex + 1) % cardDataList.size
+        if (uiState.cardDataList.isEmpty()) return
+
+        uiState = uiState.copy(
+            currIndex = (uiState.currIndex + 1) % uiState.cardDataList.size,
+            isFlipped = false
+        )
     }
 
     fun prevCard() {
-        isFlipped = false
-        currIndex = (currIndex - 1 + cardDataList.size) % cardDataList.size
+        if (uiState.cardDataList.isEmpty()) return
+
+        uiState = uiState.copy(
+            currIndex = (uiState.currIndex - 1 + uiState.cardDataList.size) % uiState.cardDataList.size,
+            isFlipped = false
+        )
     }
 }

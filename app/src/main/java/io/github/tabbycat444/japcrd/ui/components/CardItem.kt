@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import io.github.tabbycat444.japcrd.ui.theme.OutlinedText
 
 /**
  * A composable function that displays a card with text content. The card can be flipped using a click action.
@@ -26,7 +25,7 @@ fun CardItem(
     onFlip: () -> Unit
 ) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
         modifier = Modifier.clickable { onFlip() },
         elevation = CardDefaults.cardElevation(
             defaultElevation = 30.dp,
