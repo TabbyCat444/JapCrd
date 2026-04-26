@@ -42,7 +42,7 @@ val AppTypography = Typography(
         lineHeight = 90.sp
     ),
     bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily, fontSize = 65.sp, lineHeight = 80.sp),
-    bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
+    bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily, fontSize = 27.sp, lineHeight = 40.sp),
     labelLarge = baseline.labelLarge.copy(
         fontFamily = bodyFontFamily,
         fontSize = 30.sp
