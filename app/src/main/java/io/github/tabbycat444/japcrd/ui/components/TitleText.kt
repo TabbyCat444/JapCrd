@@ -26,9 +26,8 @@ fun TitleText(
     val shape = RoundedCornerShape(10.dp)
 
     Surface(
-        modifier = Modifier
-            .width(300.dp)
-            .then(modifier),
+        modifier = modifier
+            .width(300.dp),
         shape = shape,
         color = MaterialTheme.colorScheme.primary,
         tonalElevation = 2.dp,
