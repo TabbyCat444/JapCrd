@@ -92,12 +92,14 @@ Start an emulator or connect a device, then click **Run** from your IDE.
 
 ## 🗺️ Roadmap
 
-*   [ ] Katakana & Kanji Decks
-*   [ ] Quiz Mode with scoring
+*   [ ] Break down FlashcardScreen into smaller function files for modularity
+*   [ ] Implement Favorites
+*   [ ] Better launcher icon
+*   [ ] User-created custom decks (from existing cards)
 *   [ ] Study progress tracking & statistics
-*   [ ] User-created custom decks
+*   [ ] Quiz Mode with scoring
 *   [ ] Audio pronunciation playback
-*   [ ] "Obi Pan Kenobi" winter study schedule integration
+*   [ ] Writing practice
 
 ## 🤝 Contributing
 
