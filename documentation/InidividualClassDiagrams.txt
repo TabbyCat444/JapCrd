@@ -1,0 +1,108 @@
++-------------------------------------------------------------+
+|                       JapCrdViewModel                       |
+|                        <<ViewModel>>                        |
++-------------------------------------------------------------+
+| - repository: CardRepository = CardRepository()            |
+| + uiState: FlashcardUiState <<private setter>>              |
++-------------------------------------------------------------+
+| - createInitialState(): FlashcardUiState                    |
+| + shuffleDeck(): Unit                                       |
+| + setDeck(deckName: String): Unit                           |
+| + toggleFlip(): Unit                                        |
+| + nextCard(): Unit                                          |
+| + prevCard(): Unit                                          |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                         MainActivity                        |
+|                     <<ComponentActivity>>                   |
++-------------------------------------------------------------+
+| - viewModel: JapCrdViewModel <<by viewModels()>>            |
++-------------------------------------------------------------+
+| # onCreate(savedInstanceState: Bundle?): Unit              |
+| + GreetingPreview(): Unit <<composable, preview>>           |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                      FlashcardUiState                       |
+|                        <<data class>>                       |
++-------------------------------------------------------------+
+| + deckNames: List<String> = emptyList()                     |
+| + currDeck: String = ""                                     |
+| + cardDataList: List<CardData> = emptyList()                |
+| + currIndex: Int = 0                                        |
+| + isFlipped: Boolean = false                                |
++-------------------------------------------------------------+
+| + screenTitle: String <<get>>                               |
+| + currCard: CardData? <<get>>                               |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                       FlashcardScreen                       |
+|                        <<composable>>                       |
++-------------------------------------------------------------+
+| + FlashcardScreen(                                          |
+|     viewModel: JapCrdViewModel                              |
+|   )                                                         |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                          TitleText                          |
+|                        <<composable>>                       |
++-------------------------------------------------------------+
+| + TitleText(                                                |
+|     text: String,                                           |
+|     modifier: Modifier = Modifier                         |
+|   )                                                         |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                        OutlinedText                         |
+|                        <<composable>>                       |
++-------------------------------------------------------------+
+| + OutlinedText(                                             |
+|     text: String,                                           |
+|     textFamily: TextStyle,                                  |
+|     modifier: Modifier = Modifier,                          |
+|     textAlign: TextAlign = TextAlign.Center,                |
+|     outlineWidth: Float = 1.5f                              |
+|   )                                                         |
++-------------------------------------------------------------+
+
+
++-------------------------------------------------------------+
+|                          CardItem                           |
+|                        <<composable>>                       |
++-------------------------------------------------------------+
+| + CardItem(                                                 |
+|     textToShow: String,                                     |
+|     textStyle: TextStyle,                                   |
+|     onFlip: () -> Unit                                      |
+|   )                                                         |
++-------------------------------------------------------------+
+
+
++--------------------------------------------------------+
+|                     CardRepository                     |
++--------------------------------------------------------+
+| - cardDecks: Map<String, List<CardData>>              |
++--------------------------------------------------------+
+| + getDeckNames(): List<String>                         |
+| + getDeckCards(deckName: String): List<CardData>       |
++--------------------------------------------------------+
+
+
++------------------------------------------+
+|                 CardData                 |
+|               <<data class>>             |
++------------------------------------------+
+| + character: String                      |
+| + characterInfo: String                  |
++------------------------------------------+
+
+
